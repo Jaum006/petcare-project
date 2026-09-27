@@ -1,0 +1,5 @@
+# Padroniza as quebras de linha (LF) para toda a equipe, independentemente do sistema operacional
+* text=auto eol=lf
+*.png binary
+*.docx binary
+*.pdf binary
