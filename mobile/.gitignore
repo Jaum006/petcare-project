@@ -1,0 +1,38 @@
+# dependências
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# pastas nativas geradas (Continuous Native Generation)
+/ios
+/android
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.pem
+
+# Metro
+.metro-health-check*
+
+# logs
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS
+.DS_Store
+
+# variáveis de ambiente (nunca versionar o .env real)
+.env
+.env*.local
+
+# TypeScript
+*.tsbuildinfo
