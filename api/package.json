@@ -1,0 +1,42 @@
+{
+  "name": "petcare-api",
+  "version": "1.0.0",
+  "description": "API REST do PetCare (Controllers e Models do MVC)",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "node_modules/.bin/tsx watch src/server.ts",
+    "build": "node_modules/.bin/tsc",
+    "start": "node dist/server.js",
+    "typecheck": "node_modules/.bin/tsc --noEmit",
+    "test": "node_modules/.bin/vitest run",
+    "db:migrate": "node_modules/.bin/prisma migrate dev",
+    "db:seed": "node_modules/.bin/prisma db seed",
+    "db:reset": "node_modules/.bin/prisma migrate reset --force"
+  },
+  "author": "",
+  "license": "UNLICENSED",
+  "type": "commonjs",
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.4",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^26.6.3",
+    "prisma": "^6.19.3",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.2"
+  },
+  "private": true,
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  }
+}

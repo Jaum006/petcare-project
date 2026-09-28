@@ -1,0 +1,110 @@
+// Modelagem de dados do PetCare.
+// Os campos de domínio restrito (perfil, espécie, sexo, status) são String, e os valores
+// permitidos são validados nos validators (Zod): a regra fica em um só lugar e o schema é igual no SQLite e no PostgreSQL.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id           String       @id @default(uuid())
+  nome         String
+  email        String       @unique
+  senhaHash    String
+  perfil       String // RECEPCAO | VETERINARIO
+  criadoEm     DateTime     @default(now())
+  atualizadoEm DateTime     @updatedAt
+  veterinario  Veterinario?
+  consultas    Consulta[]
+}
+
+model Tutor {
+  id           String    @id
+  nome         String
+  cpf          String
+  telefone     String
+  email        String?
+  cep          String?
+  logradouro   String?
+  numero       String?
+  complemento  String?
+  bairro       String?
+  cidade       String?
+  uf           String?
+  criadoEm     DateTime  @default(now())
+  atualizadoEm DateTime  @updatedAt
+  excluidoEm   DateTime?
+  pets         Pet[]
+
+  @@index([cpf])
+  @@index([atualizadoEm])
+}
+
+model Pet {
+  id             String     @id
+  tutorId        String
+  nome           String
+  especie        String // CAO | GATO | OUTRO
+  raca           String?
+  sexo           String // M | F
+  dataNascimento DateTime?
+  peso           Float?
+  fotoUri        String?
+  observacoes    String?
+  criadoEm       DateTime   @default(now())
+  atualizadoEm   DateTime   @updatedAt
+  excluidoEm     DateTime?
+  tutor          Tutor      @relation(fields: [tutorId], references: [id])
+  consultas      Consulta[]
+
+  @@index([tutorId])
+  @@index([atualizadoEm])
+}
+
+model Veterinario {
+  id            String     @id
+  usuarioId     String?    @unique
+  nome          String
+  crmv          String
+  especialidade String?
+  telefone      String?
+  email         String?
+  ativo         Boolean    @default(true)
+  criadoEm      DateTime   @default(now())
+  atualizadoEm  DateTime   @updatedAt
+  excluidoEm    DateTime?
+  usuario       Usuario?   @relation(fields: [usuarioId], references: [id])
+  consultas     Consulta[]
+
+  @@index([crmv])
+  @@index([atualizadoEm])
+}
+
+model Consulta {
+  id                 String      @id
+  petId              String
+  veterinarioId      String
+  criadoPorId        String
+  dataHora           DateTime
+  duracaoMinutos     Int         @default(30)
+  motivo             String
+  status             String      @default("AGENDADA") // AGENDADA | REALIZADA | CANCELADA
+  diagnostico        String?
+  tratamento         String?
+  motivoCancelamento String?
+  criadoEm           DateTime    @default(now())
+  atualizadoEm       DateTime    @updatedAt
+  excluidoEm         DateTime?
+  pet                Pet         @relation(fields: [petId], references: [id])
+  veterinario        Veterinario @relation(fields: [veterinarioId], references: [id])
+  criadoPor          Usuario     @relation(fields: [criadoPorId], references: [id])
+
+  @@index([petId])
+  @@index([veterinarioId, dataHora])
+  @@index([atualizadoEm])
+}
