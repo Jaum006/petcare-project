@@ -1,5 +1,6 @@
 /**
- * Tema visual do PetCare, baseado no protótipo do Figma.
+ * Tema visual do PetCare, baseado no protótipo do Figma
+ * (https://rating-poppy-06170524.figma.site/).
  * As combinações de cor de texto e fundo foram escolhidas para ter contraste
  * de pelo menos 4,5:1 (WCAG AA). Ex.: texto branco sobre o roxo primário.
  */

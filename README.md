@@ -2,6 +2,8 @@
 
 Aplicativo móvel de gestão para pet shops e clínicas veterinárias de pequeno e médio porte: cadastro de tutores e pets, agenda de consultas, histórico de atendimentos e visão geral do dia. Projeto Integrador — ADS PUC Goiás, 2026/2.
 
+Protótipo navegável (Figma): https://rating-poppy-06170524.figma.site/
+
 ## Arquitetura
 
 MVC com front-end e API separados:
